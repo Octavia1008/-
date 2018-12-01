@@ -1,0 +1,187 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+int main()
+{
+	int qipan[15][15] = { 0 };
+	int i, j, r = 0;
+	char key;
+	char l;
+	int g = 7, b = 7;
+	printf("欢迎来到五子棋游戏！\n菜单：\n");
+	do
+	{
+		printf("【1】开始五子棋\n【2】五子棋说明书\n【3】五子棋胜负判断规则\n【4】游戏说明\n【5】开发人员\n【6】返回\n【7】退出\n");
+		l = getch();
+		switch (l)
+		{
+		case 1:
+		{do
+		{
+			system("cls");
+			//*********************************************************************************************************************
+			printf("**************！五子棋！**************\n");
+			printf("　 へ　　　　　／|\n　　/＼7　　　 ∠＿/\n　 /　│　　 ／　／\n　│　Z ＿,＜　／　　 /`ヽ\n　│　　　　　ヽ　　 /　　〉\n　 Y　　　　　`　 /　　/\n　?●　?　●　　??〈　　/\n　()　 へ　　　　|　＼〈\n　　>? ?_　 ィ　 │ ／／\n　 / へ　　 /　?＜| ＼＼\n　 ヽ_?　　(_／　 │／／\n　　7　　　　　　　|／\n　　＞―r￣￣`?―＿ ");
+			printf("\n");
+			//*********************************************************************************************************************
+			for (i = 0; i < 15; i++)
+			{
+				for (j = 0; j < 15; j++)
+				{
+					switch (qipan[i][j])
+					{
+					case 0:
+						if (i == g && j == b)
+							printf("×");
+						else
+							printf("十");
+						break;
+					case 1:
+						printf("〇");
+						break;
+					case 2:
+						printf("●");
+						break;
+					}
+				}
+				printf("\n");
+			}
+			//*********************************************************************************************************************
+			key = getch();
+			switch (key)
+			{
+			case 'a':
+			case 'A':
+				b--;
+				if (b < 0)
+					b = b + 14;
+				break;
+			case 'd':
+			case 'D':
+				b++;
+				if (b > 14)
+					b = b - 14;
+				break;
+			case 'w':
+			case 'W':
+				g--;
+				if (g < 0)
+					g = g + 14;
+				break;
+			case 's':
+			case 'S':
+				g++;
+				if (g > 14)
+					g = g - 14;
+				break;
+			case 'p':
+			case 'P':
+				if (qipan[g][b] == 0)
+				{
+					r++;
+					if (r % 2 == 0)
+						qipan[g][b] = 1;
+					if (r % 2 == 1)
+						qipan[g][b] = 2;
+				}
+				break;
+			}
+			//*************************************************************************************************************************
+			for (i = 0; i < 15; i++)
+			{
+				for (j = 0; j < 15; j++)
+				{
+					if ((j + 4) < 15)
+					{
+						if (qipan[i][j] == 1 && qipan[i][j + 1] == 1 && qipan[i][j + 2] == 1 && qipan[i][j + 3] == 1 && qipan[i][j + 4] == 1)
+						{
+							system("cls");
+							printf("         game over!\n         白棋获胜！\n");
+							key = 'q';
+						}
+						if (qipan[i][j] == 2 && qipan[i][j + 1] == 2 && qipan[i][j + 2] == 2 && qipan[i][j + 3] == 2 && qipan[i][j + 4] == 2)
+						{
+							system("cls");
+							printf("         game over!\n         黑棋获胜！\n");
+							key = 'q';
+						}
+					}
+					if ((i + 4) < 15)
+					{
+						if (qipan[i][j] == 2 && qipan[i + 1][j] == 2 && qipan[i + 2][j] == 2 && qipan[i + 3][j] == 2 && qipan[i + 4][j] == 2)
+						{
+							system("cls");
+							printf("         game over!\n         黑棋获胜！\n");
+							key = 'q';
+						}
+						if (qipan[i][j] == 1 && qipan[i + 1][j] == 1 && qipan[i + 2][j] == 1 && qipan[i + 3][j] == 1 && qipan[i + 4][j] == 1)
+						{
+							system("cls");
+							printf("         game over!\n         白棋获胜！\n");
+							key = 'q';
+						}
+					}
+					if ((j + 4) < 15 && (i + 4) < 15)
+					{
+						if (qipan[i][j] == 1 && qipan[i + 1][j + 1] == 1 && qipan[i + 2][j + 2] == 1 && qipan[i + 3][j + 3] == 1 && qipan[i + 4][j + 4] == 1)
+						{
+							system("cls");
+							printf("         game over!\n         白棋获胜！\n");
+							key = 'q';
+						}
+						if (qipan[i][j] == 2 && qipan[i + 1][j + 1] == 2 && qipan[i + 2][j + 2] == 2 && qipan[i + 3][j + 3] == 2 && qipan[i + 4][j + 4] == 2)
+						{
+							system("cls");
+							printf("         game over!\n         黑棋获胜！\n");
+							key = 'q';
+						}
+					}
+					if ((j - 4) >= 0 && (i - 4) >= 0)
+					{
+						if (qipan[i][j] == 1 && qipan[i - 1][j + 1] == 1 && qipan[i - 2][j + 2] == 1 && qipan[i - 3][j + 3] == 1 && qipan[i - 4][j + 4] == 1)
+						{
+							system("cls");
+							printf("         game over!\n         白棋获胜！\n");
+							key = 'q';
+						}
+						if (qipan[i][j] == 2 && qipan[i - 1][j + 1] == 2 && qipan[i - 2][j + 2] == 2 && qipan[i - 3][j + 3] == 2 && qipan[i - 4][j + 4] == 2)
+						{
+							system("cls");
+							printf("         game over!\n         黑棋获胜！\n");
+							key = 'q';
+						}
+					}
+				}
+			}
+			//****************************************************************************************************************************
+		} while (key != 'q');	}
+		break;
+		case 2:
+		{
+			printf("(1)对局双方各执一色棋子。\n(2)空棋盘开局。\n(3)黑先、白后，交替下子，每次只能下一子。\n(4)棋子下在棋盘的空白点上，棋子下定后，不得向其它点移动，不得从棋盘上拿掉或拿起另落别处。\n(5)黑方的第一枚棋子可下在棋盘任意交叉点上。\n(6)轮流下子是双方的权利，但允许任何一方放弃下子权");
+			printf("\n");
+		}
+		break;
+		case 3:
+		{
+			printf("五子连成一行者为胜");
+			printf("\n");
+		}
+		break;
+		case 4:
+		{
+			printf("w：↑，s：↓，a：←，d：→，p：下棋  q：退出");
+			printf("\n");
+		}
+		break;
+		case 5:
+		{
+			printf("开发人员：张子奇");
+			printf("\n");
+		}
+		break;
+		}
+	} 
+	while (l != 1 || l != 7);
+	return 0;
+}
